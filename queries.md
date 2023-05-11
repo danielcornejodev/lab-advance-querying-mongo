@@ -20,31 +20,51 @@
 
 ### 3. All the companies founded between 2000 and 2005, both years included. Retrieve only the `name` and `founded_year` fields.
 
-- **`query`**: /_You should copy/paste the query in here_/
-- **`projection`**: /_You should copy/paste the projection in here_/
+- **`query`**:  {
+    founded_year: { $gte: 2000, $lte: 2005 }
+  }
+- **`projection`**:   {
+    name: 1,
+    founded_year: 1,
+    _id: 0
+  }
 - **`sort`**: /_You should copy/paste the sort in here_/
 - **`skip`**: /_You should copy/paste the skip in here_/
 - **`limit`**: /_You should copy/paste the limit in here_/
 
 ### 4. All the companies that had a Valuation Amount of more than 100.000.000 and have been founded before 2010. Retrieve only the `name` and `ipo` fields.
 
-- **`query`**: /_You should copy/paste the query in here_/
-- **`projection`**: /_You should copy/paste the projection in here_/
+- **`query`**:   {
+    "ipo.valuation_amount": { $gt: 100000000 },
+    founded_year: { $lt: 2010 }
+  }
+- **`projection`**:   {
+    name: 1,
+    ipo: 1,
+    _id: 0
+  }
 - **`sort`**: /_You should copy/paste the sort in here_/
 - **`skip`**: /_You should copy/paste the skip in here_/
 - **`limit`**: /_You should copy/paste the limit in here_/
 
 ### 5. All the companies that have less than 1000 employees and have been founded before 2005. Order them by the number of employees and limit the search to 10 companies.
 
-- **`query`**: /_You should copy/paste the query in here_/
+- **`query`**:   {
+    number_of_employees: { $lt: 1000 },
+    founded_year: { $lt: 2005 }
+  }
 - **`projection`**: /_You should copy/paste the projection in here_/
-- **`sort`**: /_You should copy/paste the sort in here_/
+- **`sort`**: { number_of_employees: 1 }
 - **`skip`**: /_You should copy/paste the skip in here_/
-- **`limit`**: /_You should copy/paste the limit in here_/
+- **`limit`**: 10
 
 ### 6. All the companies that don't include the `partners` field.
 
-- **`query`**: /_You should copy/paste the query in here_/
+- **`query`**: db.companies.find(
+  {
+    partners: { $exists: false }
+  }
+)
 - **`projection`**: /_You should copy/paste the projection in here_/
 - **`sort`**: /_You should copy/paste the sort in here_/
 - **`skip`**: /_You should copy/paste the skip in here_/
@@ -60,7 +80,11 @@
 
 ### 8. All the companies that have at least 100 employees but less than 1000. Retrieve only the `name` and `number of employees` fields.
 
-- **`query`**: /_You should copy/paste the query in here_/
+- **`query`**: db.companies.find(
+  {
+    category_code: null
+  }
+)
 - **`projection`**: /_You should copy/paste the projection in here_/
 - **`sort`**: /_You should copy/paste the sort in here_/
 - **`skip`**: /_You should copy/paste the skip in here_/
